@@ -116,3 +116,4 @@ buildNumber.properties
 
 #password file
 password.json
+test/
