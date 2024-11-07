@@ -13,7 +13,7 @@ public class ShopptingController {
 
 	@RequestMapping(value = "/main", method = RequestMethod.GET)
 	public void mainPageGet() {
-		logger.info("¸ŞÀÎÆäÀÌÁö ½ÃÀÛ");
+		logger.info("ë©”ì¸í˜ì´ì§€ ì‹œì‘");
 
 	}
 

@@ -51,34 +51,47 @@
 	        .replace(/[^0-9]/g, '')
 	        .replace(/(^02.{0}|^01.{1}|[0-9]{3,4})([0-9]{3,4})([0-9]{4})/g, "$1-$2-$3");
 	}
+	
+	$(document).ready(function(){
+		$("#joinMemberId").focusout(function() {
+			
+			var data = {memberId: $('#joinMemberId').val()};
+			
+			$.ajax({
+				type: "post",
+				url: "/member/memberIdChk",
+				data: data,
+				success : function(result){
+					console.log("성공 여부" + result);
+				}
+			});
+		});
+	});
+	
 	</script>
 
 	<div class="container">
 		<div class="input-form-backgroud row">
 			<div class="input-form col-md-12 mx-auto">
 				<h4 class="mb-3">회원가입</h4>
-				<form method="post" action="joinPro" name="userInfo"
-					onsubmit="return checkValue()">
+				<form method="post" action="joinPro" name="userInfo" onsubmit="return checkValue()">
 					<div class="row">
 						<div class="col-md-6 mb-3">
-							<label for="memberId">아이디</label> <input type="text"
-								class="form-control" id="memberId" name="memberId"
-								maxlength="50" placeholder="아이디를 입력해주세요" required> <span
-								class="idchk"></span>
+							<label for="memberId">아이디</label>
+							<input type="text" class="form-control" id="joinMemberId" name="memberId" maxlength="50" placeholder="아이디를 입력해주세요" required>
+							<span class="idchk"></span>
 						</div>
 						<div class="col-md-6 mb-3">
-							<label for="memberName">이름</label> <input type="text"
-								class="form-control" id="memberName" placeholder="이름을 입력해주세요"
-								value="" required> <span class="memberNamechk"></span>
-
+							<label for="memberName">이름</label>
+							<input type="text" class="form-control" id="joinMemberName" placeholder="이름을 입력해주세요" value="" required>
+							<span class="memberNamechk"></span>
 						</div>
 					</div>
 					<div class="row">
 						<div class="col-md-6 mb-3">
 							<label for="memberPw">비밀번호</label>
-							<input type="password"
-								class="form-control" id="memberPw" placeholder="비밀번호를 입력해주세요"
-								value="" required> <span class="pwchk1"></span>
+							<input type="password" class="form-control" id="memberPw" placeholder="비밀번호를 입력해주세요" value="" required>
+							<span class="pwchk1"></span>
 						</div>
 
 						<div class="col-md-6 mb-3">

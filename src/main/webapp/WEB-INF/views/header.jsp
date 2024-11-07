@@ -23,6 +23,8 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
 <!-- Core theme JS-->
 <script src="<c:url value="/resources/js/scripts.js" />"></script>
+<!-- jQuery -->
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 
 </head>
 <body>
@@ -89,25 +91,21 @@
 								<div class="modal-body">
 									<form action="" class="was-validated">
 										<div class="form-group">
-											<label for="memberId">아이디 </label> <input type="text"
-												class="form-control" id="memberId" placeholder="아이디를 입력하세요"
-												name="memberId" required>
+											<label for="memberId">아이디 </label>
+											<input type="text" class="form-control" id="loginMemberId" placeholder="아이디를 입력하세요" name="memberId" required>
 											<div class="valid-feedback">확인</div>
 											<div class="invalid-feedback">아이디를 입력해주세요</div>
 										</div>
 										<div class="form-group">
-											<label for="memberPw">비밀번호 </label> <input type="password"
-												class="form-control" id="userPw" placeholder="비밀번호를 입력하세요"
-												name="memberPw" required>
+											<label for="memberPw">비밀번호 </label>
+											<input type="password" class="form-control" id="loginMemberPw" placeholder="비밀번호를 입력하세요" name="memberPw" required>
 											<div class="valid-feedback">확인</div>
 											<div class="invalid-feedback">비밀번호를 입력해주세요</div>
 										</div>
 
 
-										<button type="submit" class="btn btn-primary"
-											style="margin-left: 50%;">로그인</button>
-										<button type="button" class="btn btn-secondary"
-											onclick="location.href='/member/joinForm'">회원가입</button>
+										<button type="submit" class="btn btn-primary" style="margin-left: 50%;">로그인</button>
+										<button type="button" class="btn btn-secondary" onclick="location.href='/member/joinForm'">회원가입</button>
 
 									</form>
 

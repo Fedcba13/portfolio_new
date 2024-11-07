@@ -2,9 +2,14 @@ package com.mh.portfolio.controller;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+import com.mh.portfolio.service.MemberService;
 
 @Controller
 @RequestMapping(value = "/member")
@@ -12,10 +17,30 @@ public class MemberController {
 	
 	private static final Logger logger = LoggerFactory.getLogger(MemberController.class);
 	
-	//È¸¿ø°¡ÀÔ ÆäÀÌÁö·Î ÀÌµ¿
+	@Autowired
+	private MemberService memberService;
+	
+	//íšŒì›ê°€ì… í˜ì´ì§€ë¡œ ì´ë™
 	@GetMapping("/joinForm")
 	public void join() {
-		logger.info("È¸¿ø°¡ÀÔ ÆäÀÌÁö ÁøÀÔ");
+		logger.info("íšŒì›ê°€ì… í˜ì´ì§€ ì§„ì…");
+	}
+	
+	//ì•„ì´ë”” ì¤‘ë³µ ê²€ì‚¬
+	@RequestMapping(value = "/memberIdChk", method = RequestMethod.POST)
+	@ResponseBody
+	public String memberIdChk(String memberId) {
+		
+		logger.info(memberId);
+		
+		int result = memberService.idCheck(memberId);
+		
+		if(result != 0) {
+			return "fail";
+		} else {
+			return "success";
+		}
+		
 	}
 
 }
