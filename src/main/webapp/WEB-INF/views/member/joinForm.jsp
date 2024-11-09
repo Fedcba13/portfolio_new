@@ -46,25 +46,31 @@
 		}).open();
 	}
 	
-	function oninputPhone(target) {
-	    target.value = target.value
-	        .replace(/[^0-9]/g, '')
-	        .replace(/(^02.{0}|^01.{1}|[0-9]{3,4})([0-9]{3,4})([0-9]{4})/g, "$1-$2-$3");
-	}
-	
 	$(document).ready(function(){
 		$("#joinMemberId").focusout(function() {
 			
-			var data = {memberId: $('#joinMemberId').val()};
+			var memberId = $('#joinMemberId').val();
+			var idChk = $("#idChk");
 			
-			$.ajax({
-				type: "post",
-				url: "/member/memberIdChk",
-				data: data,
-				success : function(result){
-					console.log("성공 여부" + result);
-				}
-			});
+			if (memberId == '') {
+				idChk.css('color', 'red');
+				idChk.text('ID를 입력 해 주세요.');
+			} else {
+				$.ajax({
+					type: "post",
+					url: "/member/memberIdChk",
+					data: {memberId : memberId},
+					success : function(result){
+						if (result == "success") {
+							idChk.css('color', 'green');
+							idChk.text('해당 ID는 사용 가능합니다.');
+						} else if (result == "fail") {
+							idChk.css('color', 'red');
+							idChk.text('중복된 ID가 있습니다.');
+						}
+					}
+				});
+			}
 		});
 	});
 	
@@ -74,56 +80,50 @@
 		<div class="input-form-backgroud row">
 			<div class="input-form col-md-12 mx-auto">
 				<h4 class="mb-3">회원가입</h4>
-				<form method="post" action="joinPro" name="userInfo" onsubmit="return checkValue()">
+				<form method="post" onsubmit="return checkValue()">
 					<div class="row">
 						<div class="col-md-6 mb-3">
 							<label for="memberId">아이디</label>
 							<input type="text" class="form-control" id="joinMemberId" name="memberId" maxlength="50" placeholder="아이디를 입력해주세요" required>
-							<span class="idchk"></span>
+							<span id="idChk"></span>
 						</div>
 						<div class="col-md-6 mb-3">
 							<label for="memberName">이름</label>
-							<input type="text" class="form-control" id="joinMemberName" placeholder="이름을 입력해주세요" value="" required>
+							<input type="text" class="form-control" name="memberName" placeholder="이름을 입력해주세요" value="" required>
 							<span class="memberNamechk"></span>
 						</div>
 					</div>
 					<div class="row">
 						<div class="col-md-6 mb-3">
 							<label for="memberPw">비밀번호</label>
-							<input type="password" class="form-control" id="memberPw" placeholder="비밀번호를 입력해주세요" value="" required>
+							<input type="password" class="form-control" name="memberPw" placeholder="비밀번호를 입력해주세요" value="" required>
 							<span class="pwchk1"></span>
 						</div>
 
 						<div class="col-md-6 mb-3">
-							<label for="memberPwCheck">비밀번호 확인</label> <input type="password"
-								class="form-control" id="memberPwCheck"
-								placeholder="비밀번호를 다시 한번 입력해주세요" value="" required><span
-								class="pwchk"></span>
+							<label for="memberPwCheck">비밀번호 확인</label>
+							<input type="password" class="form-control" placeholder="비밀번호를 다시 한번 입력해주세요" value="" required>
+							<span class="pwchk"></span>
 						</div>
 
 					</div>
 					<div class="mb-3">
 						<label for="email">이메일</label>
-						<input type="text" class="form-control" id="email" placeholder="metadog@example.com" required="required"> <span class="emailchk"></span>
-					</div>
-
-					<div class="mb-3">
-						<label for="phoneNumber">휴대폰 번호</label>
-						<input type="text" class="form-control" id="phoneNumber" oninput="oninputPhone(this)" maxlength=14>
-						<span class="phchk"></span>
+						<input type="text" class="form-control" name="memberEmail" placeholder="metadog@example.com" required="required"> <span class="emailchk"></span>
 					</div>
 
 					<div class="mb-3">
 						<label for="address">우편번호</label> <span class="text-muted">&nbsp;(선택사항)</span>
-						<button type="button" class="btn btn-secondary" id="check_btn" style="vertical-align: middle;height: 21px;font-size: small;padding: 0px 12px;" onclick="sample6_execDaumPostcode()">찾기</button>
-						<input type="text" class="form-control" id="address" readonly="readonly" placeholder="찾기를 눌러 주소를 입력하세요">
+						<button type="button" class="btn btn-secondary" style="vertical-align: middle;height: 21px;font-size: small;padding: 0px 12px;" onclick="sample6_execDaumPostcode()">찾기</button>
+						<input type="text" class="form-control" name="memberAddr" readonly="readonly" placeholder="찾기를 눌러 주소를 입력하세요">
 					</div>
 
 					<div class="mb-3">
 						<label for="address2">주소<span class="text-muted">&nbsp;(선택사항)</span></label>
-						<input type="text" class="form-control" id="detailAddress" placeholder="주소를 입력해주세요.">
+						<input type="text" class="form-control" name="memberAddrDetail" placeholder="주소를 입력해주세요.">
 					</div>
-					<div class="mb-4"></div>
+					
+					<input type="hidden" id="memberGb" name="memberGb" value="003">
 
 					<button class="btn btn-primary btn-lg btn-block" type="submit">가입 완료</button>
 					<button class="btn btn-primary btn-lg btn-block" onclick="history.back();">뒤로가기</button>

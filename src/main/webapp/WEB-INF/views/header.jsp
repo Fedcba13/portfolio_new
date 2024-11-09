@@ -33,10 +33,7 @@
 	<nav class="navbar navbar-expand-lg navbar-light bg-light">
 		<div class="container px-4 px-lg-5">
 			<a class="navbar-brand" href="#!">쇼핑몰</a>
-			<button class="navbar-toggler" type="button"
-				data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
-				aria-controls="navbarSupportedContent" aria-expanded="false"
-				aria-label="Toggle navigation">
+			<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
 				<span class="navbar-toggler-icon"></span>
 			</button>
 			<div class="collapse navbar-collapse" id="navbarSupportedContent">
@@ -44,9 +41,8 @@
 					<li class="nav-item"></li>
 					<li class="nav-item"><a class="nav-link" href="#!">About</a></li>
 
-					<li class="nav-item dropdown"><a
-						class="nav-link dropdown-toggle" id="navbarDropdown" href="#"
-						role="button" data-bs-toggle="dropdown" aria-expanded="false">Shop</a>
+					<li class="nav-item dropdown">
+						<a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Shop</a>
 						<ul class="dropdown-menu" aria-labelledby="navbarDropdown">
 							<li><a class="dropdown-item" href="#!">All Products</a></li>
 							<li><hr class="dropdown-divider" /></li>
@@ -56,33 +52,27 @@
 					</li>
 					
 					<li>
-						<input type="text" id="keyword" class="head_input" width="300px"
-							value="${keyword }" placeholder="동네 이름, 물품명 등을 검색해보세요 !" />
+						<input type="text" id="keyword" class="head_input" width="300px" value="${keyword }" placeholder="동네 이름, 물품명 등을 검색해보세요 !" />
 						<button class="btn btn-outline-secondary" type="button"	id="button-addon2">
 							<i class="fa-solid fa-magnifying-glass">확인</i>
 						</button>
 					</li>
 				</ul>
-				<!-- <form class="d-flex"> -->
-
 
 				<!-- 로그인 전 -->
 				<c:if test="${SessionScope.id==null}">
 					<!-- Button trigger modal -->
-					<button type="button" class="btn btn-primary" data-toggle="modal"
-						data-target="#login">로그인</button>
-
+					<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#login">로그인</button>
+					
 					<!-- Modal -->
-					<div class="modal fade" id="login" tabindex="-1" role="dialog"
-						aria-labelledby="loginLabel" aria-hidden="true">
+					<div class="modal fade" id="login" tabindex="-1" role="dialog" aria-labelledby="loginLabel" aria-hidden="true">
 						<div class="modal-dialog" role="document">
 							<div class="modal-content">
 
 								<!-- Modal Header -->
 								<div class="modal-header">
 									<h5 class="modal-title" id="loginLabel">로그인/회원가입</h5>
-									<button type="button" class="close" data-dismiss="modal"
-										aria-label="Close">
+									<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 										<span aria-hidden="true">&times;</span>
 									</button>
 								</div>
@@ -113,11 +103,8 @@
 
 								<!-- Modal footer -->
 								<div class="modal-footer">
-									<button type="button" class="btn btn-danger"
-										data-dismiss="modal">취소</button>
+									<button type="button" class="btn btn-danger" data-dismiss="modal">취소</button>
 								</div>
-
-
 
 							</div>
 						</div>
@@ -126,21 +113,19 @@
 				</c:if>
 
 				<!-- 로그인 후 -->
-				<c:if test="${SessionScope.id!=null}">
+				<c:if test="${SessionScope.id != null}">
 						ㅇㅇㅇ님 반갑습니다.
 						<!-- 일반사용자 -->
 					<c:choose>
 
-						<c:when test="${SessionScope.adminId==null}">
+						<c:when test="${SessionScope.adminId == null}">
 							<button class="btn btn-outline-dark" type="submit">
-								<i class="bi-cart-fill me-1"></i> Cart <span
-									class="badge bg-dark text-white ms-1 rounded-pill">0</span>
+								<i class="bi-cart-fill me-1"></i> Cart <span class="badge bg-dark text-white ms-1 rounded-pill">0</span>
 							</button>
 
 							<!-- Example single danger button -->
 							<div class="btn-group">
-								<button type="button" class="btn btn-danger dropdown-toggle"
-									data-bs-toggle="dropdown" aria-expanded="false">마이페이지</button>
+								<button type="button" class="btn btn-danger dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">마이페이지</button>
 								<ul class="dropdown-menu">
 									<li><a class="dropdown-item" href="#">주문목록</a></li>
 									<li><a class="dropdown-item" href="#">찜한상품</a></li>
@@ -154,8 +139,7 @@
 						</c:when>
 						<c:otherwise>
 							<div class="btn-group">
-								<button type="button" class="btn btn-danger dropdown-toggle"
-									data-bs-toggle="dropdown" aria-expanded="false">관리자페이지</button>
+								<button type="button" class="btn btn-danger dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">관리자페이지</button>
 								<ul class="dropdown-menu">
 									<li><a class="dropdown-item" href="#">주문목록</a></li>
 									<li><a class="dropdown-item" href="#">찜한상품</a></li>
@@ -169,7 +153,6 @@
 						</c:otherwise>
 					</c:choose>
 				</c:if>
-				<!-- 		</form> -->
 			</div>
 		</div>
 	</nav>

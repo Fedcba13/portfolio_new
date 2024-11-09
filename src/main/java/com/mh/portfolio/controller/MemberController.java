@@ -5,10 +5,12 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.mh.portfolio.model.MemberVO;
 import com.mh.portfolio.service.MemberService;
 
 @Controller
@@ -25,6 +27,19 @@ public class MemberController {
 	public void join() {
 		logger.info("회원가입 페이지 진입");
 	}
+	
+	//회원가입
+	@PostMapping("/joinForm")
+	public String memberJoin(MemberVO member) {
+		
+		logger.info("회원가입 진행");
+		
+		//회원가입 서비스 실행
+		memberService.memberJoin(member);
+		
+		return "redirect:/main";
+	}
+	
 	
 	//아이디 중복 검사
 	@RequestMapping(value = "/memberIdChk", method = RequestMethod.POST)
